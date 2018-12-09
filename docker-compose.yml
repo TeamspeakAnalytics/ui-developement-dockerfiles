@@ -33,3 +33,31 @@ services:
       - ts3db
     volumes:
       - ./drives/ts3server:/var/ts3server
+  analyticsDb:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    restart: always
+    ports:
+      - 1433:1433
+    environment: 
+      ACCEPT_EULA: Y
+      SA_PASSWORD: example1Passwd
+      MSSQL_PID: Express
+    volumes: 
+      - ./drives/analyticsDb:/var/opt/mssql
+  analytics-service:
+    build: ./teamspeak-analytics-api
+    restart: always
+    ports: 
+      - 80:80
+    depends_on: 
+      - analyticsDb
+      - ts3Server
+    environment: 
+      MSSQL_Server_Address: analyticsDb
+      MSSQL_Server_User: sa
+      MSSQL_Server_Password: example1Passwd
+      MSSQL_Server_Database_Name: TeamspeakAnalytics
+      TS3_Address: ts3Server
+      TS3_User: serveradmin
+      TS3_Password: VHvakrGZ
+
