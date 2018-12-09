@@ -8,7 +8,6 @@ connstr="Server=$mssqlServerIp;Database=$MSSQL_Server_Database_Name;User Id=$MSS
 tsServerIp=$(getent hosts $TS3_Address | awk '{ print $1 }')
 
 if [ ! -d $folder ] ; then
-    rm -r $folder
     echo "Downloading repo from $repoUrl"
     git clone $repoUrl $folder
     echo "Downloaded repo"
