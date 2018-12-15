@@ -17,9 +17,16 @@ else
     cd ..
 fi
 
-echo "getting latest version"
+echo "Checking conecctivity to github"
 cd $folder
-git pull
+wget -q --spider https://github.com
+if [ $? -eq 0 ]; then
+    echo "Getting latest version"
+    git pull
+else
+    echo "No connection to github possible"
+    echo "Working with cached version"
+fi
 
 cd src/TeamspeakAnalytics.hosting
 sed -r ':a; s%(.*)/\*.*\*/%\1%; ta; /\/\*/ !b; N; ba' appsettings.json > _tmp.json && mv _tmp.json appsettings.json

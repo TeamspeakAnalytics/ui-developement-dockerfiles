@@ -3,7 +3,8 @@ FROM microsoft/dotnet:2.1-sdk
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         git \
-        jq
+        jq \
+        wget
 
 COPY start.sh /opt/ts3analytics/start.sh
 RUN chmod +x /opt/ts3analytics/start.sh
