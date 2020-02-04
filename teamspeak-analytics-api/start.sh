@@ -1,4 +1,4 @@
-Config#!/bin/bash
+#!/bin/bash
 repoUrl="https://github.com/TeamspeakAnalytics/hosting-and-backend.git"
 folder="serverFiles"
 csproj="TeamspeakAnalytics.hosting.csproj"
